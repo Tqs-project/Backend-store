@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "drinkup-316817",
+  "private_key_id": "e9dd3610e0d64cd766884a148dfbb8418a3212b9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDkHZisa4PbMrUk\nl15HMRoS2fKaqgdTcw1KsJI4nR3hFDQcvKWjHNny2mzofvuw/NVvdpFxuJ1nssUh\no3klkG6dDfFMJIUzRx3vVI+QHvuuvqA0j7Dt5SkAZ4OfNRUS2UNLdaL03y2zRr73\npZRFn/G4k8DrbN49luUopnxxdaU94iLeLSsONM8hJBw1Re4rqQ8Sc+CdzdWATSFW\nH4/O4jcrTRzukqWTtUrcwEbmA75YJKdWa40V6VjB5wmyyXBx7h2o62amRYvxrMMR\nxdfx4iaBEgvJS+kPAu/7qV0bOUDEvFYRiE+JgQWX4QN9kjMydNeN/gJBXQpmEebf\nMJGOrdRrAgMBAAECggEAEBdiYK9I4tqF2qnu1ZjKHRBQw8ZAtAtGocEo32N96xWw\nw2IvUP1FBpOP4Sqr+IUtTSqRAfOi7uC2dTQB5Lt2gg+suNFOsBpRK0PMyL7WxDHg\nPTTxpyZmKQgkScPF08mNrLIEp79iiuXvrKp6dhrdQ0bw8eqBFtkhGyf7WUmSOXYr\nJWgYEN3m5/ErZWtdU1UGkIqX2Z4FlbAi4zGR4awyBEQLh+YvnrYt940tbSoeDzPW\n7u7n0jISvP0ErBLJHIAyNfJIk/8yntf5xI7sPdBv8du8htTGtqjzoXTIYU5/wXrX\nBMwRri4uEtB7pcQW8uJ20LsmfymEolgTH/dn5+TRsQKBgQDzG41xjqqFKYbu8wYT\ngGlEtDKPrnQ0BvEE3ZL5v/Anmj15EMPAtBAjPB3UdjDQBkvxhDjwhIcXnJg+hX9H\nPKMNzVPNFvfK7rCfFhlslvQlUgHGq7oGKgS7r1EhZCZzZiLEa7/M3rluVUx8j11j\nWJgO993d7iKMemi7I4fmt/NBMwKBgQDwNoLZEHWJKLpJFHehmAO2yg/mU2ud1dod\nD88koudyKh1wl413kYWNpMea5bAWZMpcSrQJine+ZrgxD/iHDa7PD4/t01EnLUI2\nOjWYVaGnyq+QOnWBBa7V3FpYuhIGBQZovs7aJXGUNvnWmgzm8aakoxXUWIsvWcNW\nXqeC87SP6QJ/cueS8xl7f3UhUc+MD6uiFdcWDtNmGTEuuh4AWgted1lvtMk3vN1e\nw0im0MUMTUasnnrgbs41C/P4AZUXk5QVfXCPK2CvvjsTQB4x5iFzRDB+pmiEhGVX\n114F+sJbai/cPvqurSaYfo3SmQ0qFsrJFEoTk9H6gmtZFRq2IVbQowKBgQDUR5gC\ns2TrPS7C/m9qQqillJPQe9ASv7XtENeCDOR0I3u40HWYQOXBculinbCrWY7rWKkZ\n9WA0xxnnYbHDx/e/zITpK2IAOSLWQUKzyJj/a0MTNlY5GwiSvhSpbGYZI7+yOU0b\nwxNIY/0OBT15qfwWankUGtuFkNHrNeLa+vuKYQKBgQDHiKSck/Sf+puljFuYtwgw\npeUcB25KbYZa1AacCYw2w4eJ4wknQLh1SSRN+4u4Rdu0MUzXX6Z7nOF0QFcRqqVN\nOB5cRT34Cmx0L1i5TRguFx/FYPRO0e1QP5ls04tKKQ5evxXh8YzPK5MghdSAnPX6\njhtdAOZnrxFvpXBFHL+29A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "drinkup-316817@appspot.gserviceaccount.com",
+  "client_id": "114574142699891507767",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/drinkup-316817%40appspot.gserviceaccount.com"
+}
