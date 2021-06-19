@@ -13,23 +13,12 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
-import java.util.Map;
 
 @Log4j2
 public class Utils {
     private Utils() { }
 
-    public JSONObject getWeDeliverAPI(String endpoint) throws IOException, InterruptedException {
-
-        HttpRequest request = null;
-        try {
-            request = HttpRequest.newBuilder()
-                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com"+endpoint))
-                    .GET()
-                    .build();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+    public static JSONObject requestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
 
         HttpResponse<String> response = HttpClient
                 .newBuilder()
@@ -38,12 +27,7 @@ public class Utils {
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
         try {
-            var jsonResponse = new JSONObject(response.body());
-            String status = (String) jsonResponse.get("status");
-            if(status.equals("error")){
-                return null;
-            }
-            return jsonResponse;
+            return new JSONObject(response.body());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,50 +36,29 @@ public class Utils {
 
     }
 
-    public JSONObject postWeDeliverAPI(String endpoint, Map<String, String> params) throws IOException, InterruptedException {
-
-        var objectMapper = new ObjectMapper();
-        var requestBody = objectMapper.writeValueAsString(params);
-
-        HttpRequest request = null;
-        try {
-            request = HttpRequest.newBuilder()
-                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com/api"+endpoint))
-                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                    .build();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        HttpResponse<String> response = HttpClient
-                .newBuilder()
-                .proxy(ProxySelector.getDefault())
-                .build()
-                .send(request, HttpResponse.BodyHandlers.ofString());
-
-        try {
-            var jsonResponse = new JSONObject(response.body());
-            String status = (String) jsonResponse.get("status");
-            if(status.equals("error")){
-                return null;
-            }
-            return jsonResponse;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-
-    }
-
-    public String getAuthToken() throws IOException, InterruptedException, JSONException {
+    public static String getAuthToken() throws IOException, InterruptedException, JSONException {
 
         var body = new HashMap<String, String>();
         body.put("username", "DrinkUp");
         body.put("email", "drinkup@gmail.com");
         body.put("password", "password");
 
-        JSONObject jsonResponse = postWeDeliverAPI("/customer/signin", body);
+        var objectMapper = new ObjectMapper();
+        var requestBody = objectMapper.writeValueAsString(body);
+
+        HttpRequest request = null;
+
+        try {
+            request = HttpRequest.newBuilder()
+                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com/api/customer/signin"))
+                    .setHeader("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jsonResponse = requestWeDeliverAPI(request);
 
         if (jsonResponse==null){
             return null;
