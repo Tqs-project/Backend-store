@@ -3,6 +3,7 @@ package deti.tqs.drinkup.model;
 import lombok.Data;
 
 import javax.persistence.*;
+
 @Data
 @Entity
 @Table(name = "order_items")

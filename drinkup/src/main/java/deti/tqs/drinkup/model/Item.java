@@ -3,6 +3,7 @@ package deti.tqs.drinkup.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +21,7 @@ public class Item {
     private Integer quantity;
 
     @Column(nullable = false)
-    private Integer price;
+    private Double price;
 
     @Column
     private String brand;
@@ -32,11 +33,11 @@ public class Item {
     private String description;
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
-    private List<OrderItem> orders_with_item;
+    private List<OrderItem> ordersWithItem;
 
     public Item() {}
 
-    public Item(String name, Integer quantity, Integer price, String brand, Double alcoholContent, String description) {
+    public Item(String name, Integer quantity, Double price, String brand, Double alcoholContent, String description) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -44,5 +45,6 @@ public class Item {
         this.alcoholContent = alcoholContent;
         this.description = description;
 
+        this.ordersWithItem = new ArrayList<>();
     }
 }

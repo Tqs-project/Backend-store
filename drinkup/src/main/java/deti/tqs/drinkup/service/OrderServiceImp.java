@@ -68,7 +68,7 @@ public class OrderServiceImp implements OrderService{
             for (Map.Entry<String, Integer> entry : orderDto.getItems().entrySet()) {
                 new OrderItem(itemRepository.findByName(entry.getKey()), entry.getValue());
             }
-            Order order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()), orderDto.getLocation(), orders);
+            Order order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()), orderDto.getCost(), orderDto.getLocation(), orders);
             orderRepository.save(order);
             return orderDto;
         }
