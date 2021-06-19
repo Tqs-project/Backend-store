@@ -39,6 +39,7 @@ public class OrderServiceImp implements OrderService{
 
     public OrderDto placeOrder(OrderDto orderDto, String token) throws IOException, InterruptedException {
         var body = new HashMap<String, Object>();
+        body.put("username", "DrinkUp");
         body.put("paymentType", orderDto.getPaymentType());
         body.put("cost", orderDto.getCost());
         body.put("location", orderDto.getLocation());

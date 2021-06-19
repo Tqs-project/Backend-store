@@ -1,6 +1,8 @@
 package deti.tqs.drinkup.controller;
 
 import deti.tqs.drinkup.dto.OrderDto;
+import deti.tqs.drinkup.model.User;
+import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.service.OrderService;
 import deti.tqs.drinkup.util.Utils;
 import lombok.extern.log4j.Log4j2;
@@ -22,6 +24,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private final String token = Utils.getAuthToken();
 

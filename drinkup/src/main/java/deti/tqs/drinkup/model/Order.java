@@ -34,8 +34,8 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany
-    private List<OrderItem> orders;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private List<OrderItem> order_items;
 
     public Order() {}
 
@@ -46,17 +46,17 @@ public class Order {
 
         this.orderTimestamp = new Timestamp(System.currentTimeMillis());
         this.status = "WAITING";
-        orders = new ArrayList<>();
+        order_items = new ArrayList<>();
     }
 
-    public Order(String paymentType, User user, String location, List<OrderItem> orders) {
+    public Order(String paymentType, User user, String location, List<OrderItem> order_items) {
         this.paymentType = paymentType;
         this.user = user;
         this.location = location;
-        this.orders = orders;
+        this.order_items = order_items;
 
         this.orderTimestamp = new Timestamp(System.currentTimeMillis());
         this.status = "WAITING";
-        orders = new ArrayList<>();
+        order_items = new ArrayList<>();
     }
 }

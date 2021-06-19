@@ -3,6 +3,7 @@ package deti.tqs.drinkup.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -29,6 +30,9 @@ public class Item {
 
     @Column
     private String description;
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    private List<OrderItem> orders_with_item;
 
     public Item() {}
 
