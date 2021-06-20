@@ -150,6 +150,18 @@
 			<artifactId>modelmapper-spring</artifactId>
 			<version>2.4.3</version>
 		</dependency>
+        <dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -226,7 +238,7 @@
 						</goals>
 						<configuration>
 							<!-- Sets the path to the file which contains the execution data. -->
-							<destFile>${jacoco.ut.execution.data.file}</destFile>
+							<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 							<!--
                                 Sets the name of the property containing the settings
                                 for JaCoCo runtime agent.
@@ -246,9 +258,9 @@
 						</goals>
 						<configuration>
 							<!-- Sets the path to the file which contains the execution data. -->
-							<dataFile>${jacoco.ut.execution.data.file}</dataFile>
+							<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
 							<!-- Sets the output directory for the code coverage report. -->
-							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+							<outputDirectory>${basedir}/target/coverage-reports/jacoco-ut</outputDirectory>
 						</configuration>
 					</execution>
 					<!--
@@ -263,7 +275,7 @@
 						</goals>
 						<configuration>
 							<!-- Sets the path to the file which contains the execution data. -->
-							<destFile>${jacoco.it.execution.data.file}</destFile>
+							<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 							<!--
                                 Sets the name of the property containing the settings
                                 for JaCoCo runtime agent.
@@ -283,9 +295,9 @@
 						</goals>
 						<configuration>
 							<!-- Sets the path to the file which contains the execution data. -->
-							<dataFile>${jacoco.it.execution.data.file}</dataFile>
+							<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
 							<!-- Sets the output directory for the code coverage report. -->
-							<outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+							<outputDirectory>${basedir}/target/jacoco-it</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
