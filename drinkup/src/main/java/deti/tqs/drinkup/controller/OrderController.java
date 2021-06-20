@@ -2,6 +2,7 @@ package deti.tqs.drinkup.controller;
 
 import deti.tqs.drinkup.dto.OrderDto;
 import deti.tqs.drinkup.model.User;
+import deti.tqs.drinkup.repository.ItemRepository;
 import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.service.OrderService;
 import deti.tqs.drinkup.util.Utils;
@@ -13,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @RestController
@@ -26,6 +29,9 @@ public class OrderController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ItemRepository itemRepository;
+
     private final String token = Utils.getAuthToken();
 
     public OrderController() throws JSONException, IOException, InterruptedException {
@@ -37,6 +43,10 @@ public class OrderController {
         var user = userRepository.findByUsername(orderDto.getUserName());
         if (user.isEmpty())
             return new ResponseEntity<>(new OrderDto(), HttpStatus.UNAUTHORIZED);
+
+        if(!checkItemIntegrity(orderDto)){
+            return new ResponseEntity<>(new OrderDto(), HttpStatus.NOT_ACCEPTABLE);
+        }
 
         log.info("Saving order " + orderDto.getLocation() + ".");
 
@@ -59,5 +69,18 @@ public class OrderController {
         return new ResponseEntity<>(this.orderService.getAllOrders(active, token),
                 HttpStatus.ACCEPTED);
 
+    }
+
+    private boolean checkItemIntegrity(OrderDto orderDto){
+        HashMap<String, Integer> items = orderDto.getItems();
+        double trueCost = 0.0;
+
+        for (Map.Entry<String,Integer> entry : items.entrySet()) {
+            if(!itemRepository.existsByName(entry.getKey())){
+                return false;
+            }
+            trueCost+= itemRepository.findByName(entry.getKey()).getPrice() * entry.getValue();
+        }
+        return orderDto.getCost()==trueCost;
     }
 }
