@@ -10,12 +10,10 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @Log4j2
 @RestController
@@ -33,8 +31,6 @@ public class OrderController {
     public OrderController() throws JSONException, IOException, InterruptedException {
     }
 
-    //public methods for endpoints, same as service
-
     @PostMapping()
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) throws IOException, InterruptedException {
 
@@ -44,6 +40,22 @@ public class OrderController {
 
         return new ResponseEntity<>(this.orderService.placeOrder(orderDto, token),
                 HttpStatus.CREATED);
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getOrderState(@PathVariable int id) throws IOException, InterruptedException, JSONException {
+
+        return new ResponseEntity<>(this.orderService.checkOrderState(id, token),
+                HttpStatus.ACCEPTED);
+
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<OrderDto>> getOrderState(@RequestBody boolean active) throws IOException, InterruptedException, JSONException {
+
+        return new ResponseEntity<>(this.orderService.getAllOrders(active, token),
+                HttpStatus.ACCEPTED);
 
     }
 }

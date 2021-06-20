@@ -2,6 +2,7 @@ package deti.tqs.drinkup.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +29,24 @@ public class Utils {
 
         try {
             return new JSONObject(response.body());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public static JSONArray arrayRequestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
+
+        HttpResponse<String> response = HttpClient
+                .newBuilder()
+                .proxy(ProxySelector.getDefault())
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofString());
+
+        try {
+            return new JSONArray(response.body());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -24,7 +24,7 @@ public class Order {
     @Column(columnDefinition = "Decimal(10, 2)")
     private Double cost;
 
-    @Column(columnDefinition = "VARCHAR(20) CHECK (status IN ('WAITING', 'DELIVERING', 'DELIVERED', 'NOT DELIVERED))")
+    @Column(columnDefinition = "VARCHAR(20) CHECK (status IN ('WAITING', 'DELIVERING', 'DELIVERED', 'NOT DELIVERED'))")
     private String status;
 
     @Column(columnDefinition = "VARCHAR(100)")
