@@ -34,7 +34,9 @@ public class OrderController {
     @PostMapping()
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) throws IOException, InterruptedException {
 
-        //TODO check if user exists
+        var user = userRepository.findByUsername(orderDto.getUserName());
+        if (user.isEmpty())
+            return new ResponseEntity<>(new OrderDto(), HttpStatus.UNAUTHORIZED);
 
         log.info("Saving order " + orderDto.getLocation() + ".");
 

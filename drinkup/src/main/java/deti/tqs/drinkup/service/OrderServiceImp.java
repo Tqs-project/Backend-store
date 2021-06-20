@@ -70,7 +70,7 @@ public class OrderServiceImp implements OrderService{
             for (Map.Entry<String, Integer> entry : orderDto.getItems().entrySet()) {
                 new OrderItem(itemRepository.findByName(entry.getKey()), entry.getValue());
             }
-            Order order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()), orderDto.getLocation(), orders);
+            var order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()).get(), orderDto.getLocation(), orders);
             orderRepository.save(order);
             return orderDto;
         }
@@ -122,13 +122,13 @@ public class OrderServiceImp implements OrderService{
 
         if(jsonResponse!=null){
             for (int i = 0; i < jsonResponse.length(); i++) {
-                 JSONObject o = jsonResponse.getJSONObject(i);
+                 var o = jsonResponse.getJSONObject(i);
                  var orderDto = new OrderDto();
                  orderDto.setCost((Double) o.get("cost"));
                  orderDto.setLocation((String) o.get("location"));
                  orderDto.setUserName((String) o.get("username"));
                  orderDto.setStatus((String) o.get("status"));
-                 orderDto.setId(new Long((Integer) o.get("id")));
+                 orderDto.setId(Long.valueOf((Integer) o.get("id")));
                  if (active){
                      if ((o.get("status") != "DELIVERED")){
                          list.add(orderDto);
