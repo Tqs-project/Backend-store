@@ -4,6 +4,7 @@ import deti.tqs.drinkup.dto.TokenDto;
 import deti.tqs.drinkup.dto.UserDto;
 import deti.tqs.drinkup.dto.UserLoginDto;
 import deti.tqs.drinkup.model.User;
+import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.service.UserService;
 import deti.tqs.drinkup.util.JsonUtil;
 import lombok.extern.log4j.Log4j2;
@@ -24,9 +25,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Log4j2
+
 @WebMvcTest(UserController.class)
 class UserControllerTest_WithMockServiceIT {
+
+    @MockBean
+    private UserRepository userRepository;
 
     @Autowired
     private MockMvc mvc;
