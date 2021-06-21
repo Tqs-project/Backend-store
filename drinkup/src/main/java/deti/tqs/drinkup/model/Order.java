@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,31 +31,30 @@ public class Order {
     private String location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    private List<OrderItem> order_items;
 
     public Order() {}
 
-    public Order(String paymentType, User user, Double cost, String location) {
+    public Order(String paymentType, User user, String location) {
         this.paymentType = paymentType;
         this.user = user;
-        this.cost = cost;
         this.location = location;
 
         this.orderTimestamp = new Timestamp(System.currentTimeMillis());
         this.status = "WAITING";
-        this.orderItems = new ArrayList<>();
+        order_items = new ArrayList<>();
     }
 
-    public Order(String paymentType, User user, Double cost, String location, List<OrderItem> orderItems) {
+    public Order(String paymentType, User user, Double cost, String location, List<OrderItem> order_items) {
         this.paymentType = paymentType;
         this.user = user;
         this.cost = cost;
         this.location = location;
-        this.orderItems = orderItems;
+        this.order_items = order_items;
 
         this.orderTimestamp = new Timestamp(System.currentTimeMillis());
         this.status = "WAITING";
