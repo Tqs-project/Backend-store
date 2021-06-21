@@ -150,7 +150,6 @@ class UserServiceImpTest {
 
 
         userCreateDto.setUsername(null);
-        System.out.println(userCreateDto.getEmail());
 
         Mockito.when(userRepository.findByEmail(userCreateDto.getEmail()))
                 .thenReturn(user);

@@ -79,10 +79,8 @@ public class UserController {
     @GetMapping()
     public ResponseEntity<UserDto> getUser(@RequestHeader String username,
                                         @RequestHeader String idToken) {
-        System.out.println("username = " + username);
-        System.out.println("token = " + idToken);
         var user = userRepository.findByUsername(username);
-        System.out.println("user = " + user.getEmail());
+
         if (user == null)
             return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
 
