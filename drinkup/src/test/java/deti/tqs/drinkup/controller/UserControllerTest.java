@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -100,7 +101,7 @@ class UserControllerTest_WithMockServiceIT {
                 .thenReturn(userDtoResponse);
 
         Mockito.when(userRepository.findByUsername(user.getUsername()))
-                .thenReturn(user);
+                .thenReturn(Optional.ofNullable(user));
 
         mvc.perform(
                 put("/api/users")

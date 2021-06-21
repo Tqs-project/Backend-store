@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -101,7 +102,7 @@ class UserServiceImpTest {
 
 
         Mockito.when(userRepository.findByUsername(userCreateDto.getUsername()))
-                .thenReturn(user);
+                .thenReturn(Optional.ofNullable(user));
 
         Mockito.when(userRepository.saveAndFlush(user)).thenReturn(
                 userFromDb
@@ -124,7 +125,7 @@ class UserServiceImpTest {
                 .thenReturn(true);
 
         Mockito.when(userRepository.findByUsername(userCreateDto.getUsername()))
-                .thenReturn(user);
+                .thenReturn(Optional.ofNullable(user));
 
         assertThat(userService.login(userCreateDto))
                 .isEqualTo(token);

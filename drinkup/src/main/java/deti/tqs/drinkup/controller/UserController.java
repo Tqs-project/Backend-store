@@ -39,10 +39,10 @@ public class UserController {
                                                       @RequestBody UserDto userDto) {
 
         var user = userRepository.findByUsername(username);
-        if (user == null)
+        if (user.isEmpty())
             return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
 
-        if (!idToken.equals(user.getAuthToken()))
+        if (!idToken.equals(user.get().getAuthToken()))
             return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
 
         log.info(String.format("Updating customer %s.", username));
@@ -81,12 +81,12 @@ public class UserController {
                                         @RequestHeader String idToken) {
         var user = userRepository.findByUsername(username);
 
-        if (user == null)
+        if (user.isEmpty())
             return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
 
-        if (!idToken.equals(user.getAuthToken()))
+        if (!idToken.equals(user.get().getAuthToken()))
             return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
 
-        return new ResponseEntity<>(Utils.parseUserDto(user), HttpStatus.OK);
+        return new ResponseEntity<>(Utils.parseUserDto(user.get()), HttpStatus.OK);
     }
 }

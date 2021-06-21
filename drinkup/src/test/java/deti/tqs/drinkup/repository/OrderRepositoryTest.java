@@ -54,7 +54,8 @@ class OrderRepositoryTest {
                 "MB",
                 user1,
                 25.0,
-                "Rua do Carregueiro, Oliveirinha");
+                "Rua do Carregueiro, Oliveirinha",
+                lista);
     }
 
     @AfterEach

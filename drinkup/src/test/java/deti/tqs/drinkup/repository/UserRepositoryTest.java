@@ -53,7 +53,7 @@ class UserRepositoryTest {
     void findByUsername() {
         this.testEntityManager.persistAndFlush(user1);
 
-        User res = this.userRepository.findByUsername(user1.getUsername());
+        User res = this.userRepository.findByUsername(user1.getUsername()).get();
 
         Assertions.assertThat(res).isEqualTo(
                 user1

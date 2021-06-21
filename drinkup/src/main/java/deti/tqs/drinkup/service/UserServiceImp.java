@@ -40,7 +40,7 @@ public class UserServiceImp implements UserService{
 
     @Override
     public UserDto updateUser(UserDto userDto) {
-        var user = this.userRepository.findByUsername(userDto.getUsername());
+        var user = this.userRepository.findByUsername(userDto.getUsername()).get();
 
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
@@ -56,7 +56,7 @@ public class UserServiceImp implements UserService{
         User optUser;
 
         if (userDto.getUsername() != null) {
-            optUser = this.userRepository.findByUsername(userDto.getUsername());
+            optUser = this.userRepository.findByUsername(userDto.getUsername()).get();
         } else if (userDto.getEmail() != null) {
             optUser = this.userRepository.findByEmail(userDto.getEmail());
         } else {

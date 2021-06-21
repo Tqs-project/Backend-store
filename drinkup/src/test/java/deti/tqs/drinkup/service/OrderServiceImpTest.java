@@ -71,7 +71,7 @@ class OrderServiceImpTest {
                 items
         );
 
-        item = new Item("Smirnoff White Vodka", 500, 20, "Smirnoff", 55.6, "Very good");
+        item = new Item("Smirnoff White Vodka", 500, 20.0, "Smirnoff", 55.6, "Very good");
 
         orderItem = new OrderItem(item, 2);
         List<OrderItem> list = new ArrayList<>();

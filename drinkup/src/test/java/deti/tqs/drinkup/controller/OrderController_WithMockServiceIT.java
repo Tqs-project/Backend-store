@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.HashMap;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -59,7 +58,7 @@ class OrderController_WithMockServiceIT {
 
         user = new User("Manel123", "manel432@gmail.com", "boapass");
 
-        item = new Item("Smirnoff White Vodka", 500, 20, "Smirnoff", 55.6, "Very good");
+        item = new Item("Smirnoff White Vodka", 500, 20.0, "Smirnoff", 55.6, "Very good");
 
         HashMap<String,Integer> items = new HashMap<>();
         items.put("Smirnoff White Vodka", 2);
@@ -145,7 +144,7 @@ class OrderController_WithMockServiceIT {
     @Test
     void whenPriceInvalid_thenNotAcceptable() throws Exception{
         Mockito.when(userRepository.findByUsername("Manel123")).thenReturn(Optional.ofNullable(user));
-        item.setPrice(25);
+        item.setPrice(25.0);
         Mockito.when(itemRepository.findByName("Smirnoff White Vodka")).thenReturn(item);
         Mockito.when(itemRepository.existsByName("Smirnoff White Vodka")).thenReturn(true);
         Mockito.when(orderService.placeOrder(any(OrderDto.class), any(String.class)))

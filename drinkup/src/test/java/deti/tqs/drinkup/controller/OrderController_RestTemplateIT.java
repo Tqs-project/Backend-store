@@ -50,7 +50,7 @@ class OrderController_RestTemplateIT {
         user = new User("Manel123", "manel432@gmail.com", "boapass");
         userRepository.save(user);
 
-        item = new Item("Smirnoff White Vodka", 500, 20, "Smirnoff", 55.6, "Very good");
+        item = new Item("Smirnoff White Vodka", 500, 20.0, "Smirnoff", 55.6, "Very good");
         itemRepository.save(item);
 
         HashMap<String,Integer> items = new HashMap<>();
