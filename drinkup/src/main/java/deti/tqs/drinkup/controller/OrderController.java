@@ -1,6 +1,7 @@
 package deti.tqs.drinkup.controller;
 
 import deti.tqs.drinkup.dto.OrderDto;
+import deti.tqs.drinkup.model.Item;
 import deti.tqs.drinkup.model.User;
 import deti.tqs.drinkup.repository.ItemRepository;
 import deti.tqs.drinkup.repository.UserRepository;
@@ -32,7 +33,9 @@ public class OrderController {
     @Autowired
     private ItemRepository itemRepository;
 
-    private final String token = Utils.getAuthToken();
+    private final Utils utils = new Utils();
+
+    private final String token = utils.getAuthToken();
 
     public OrderController() throws JSONException, IOException, InterruptedException {
     }
@@ -64,7 +67,7 @@ public class OrderController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<OrderDto>> getOrderState(@RequestBody boolean active) throws IOException, InterruptedException, JSONException {
+    public ResponseEntity<List<OrderDto>> getAllOrder(@RequestBody boolean active) throws IOException, InterruptedException, JSONException {
 
         return new ResponseEntity<>(this.orderService.getAllOrders(active, token),
                 HttpStatus.ACCEPTED);

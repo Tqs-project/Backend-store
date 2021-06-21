@@ -17,9 +17,9 @@ import java.util.HashMap;
 
 @Log4j2
 public class Utils {
-    private Utils() { }
+    public Utils() { }
 
-    public static JSONObject requestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
+    public JSONObject requestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
 
         HttpResponse<String> response = HttpClient
                 .newBuilder()
@@ -37,7 +37,7 @@ public class Utils {
 
     }
 
-    public static JSONArray arrayRequestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
+    public JSONArray arrayRequestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
 
         HttpResponse<String> response = HttpClient
                 .newBuilder()
@@ -55,7 +55,7 @@ public class Utils {
 
     }
 
-    public static String getAuthToken() throws IOException, InterruptedException, JSONException {
+    public String getAuthToken() throws IOException, InterruptedException, JSONException {
 
         var body = new HashMap<String, String>();
         body.put("username", "DrinkUp");

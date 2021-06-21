@@ -31,13 +31,15 @@ import java.util.Map;
 public class OrderServiceImp implements OrderService{
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
+
+    private Utils utils = new Utils();
 
     public OrderDto placeOrder(OrderDto orderDto, String token) throws IOException, InterruptedException {
 
@@ -46,7 +48,6 @@ public class OrderServiceImp implements OrderService{
         body.put("paymentType", orderDto.getPaymentType());
         body.put("cost", orderDto.getCost());
         body.put("location", orderDto.getLocation());
-
 
         var objectMapper = new ObjectMapper();
         var requestBody = objectMapper.writeValueAsString(body);
@@ -65,16 +66,25 @@ public class OrderServiceImp implements OrderService{
             e.printStackTrace();
         }
 
-        JSONObject jsonResponse = Utils.requestWeDeliverAPI(request);
+        JSONObject jsonResponse = utils.requestWeDeliverAPI(request);
 
         if(jsonResponse!=null){
             List<OrderItem> orders = new ArrayList<>();
             for (Map.Entry<String, Integer> entry : orderDto.getItems().entrySet()) {
                 new OrderItem(itemRepository.findByName(entry.getKey()), entry.getValue());
             }
-            var order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()).get(), orderDto.getLocation(), orders);
-            orderRepository.save(order);
-            return orderDto;
+            var order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()).get(), orderDto.getCost(), orderDto.getLocation(), orders);
+            var ret = orderRepository.save(order);
+            return new OrderDto(
+                    ret.getId(),
+                    ret.getOrderTimestamp(),
+                    ret.getPaymentType(),
+                    ret.getStatus(),
+                    ret.getCost(),
+                    ret.getLocation(),
+                    ret.getUser().getUsername(),
+                    orderDto.getItems()
+            );
         }
         return null;
     }
@@ -95,7 +105,7 @@ public class OrderServiceImp implements OrderService{
             e.printStackTrace();
         }
 
-        JSONObject jsonResponse = Utils.requestWeDeliverAPI(request);
+        JSONObject jsonResponse = utils.requestWeDeliverAPI(request);
 
         if(jsonResponse!=null){
             return (String) jsonResponse.get("status");
@@ -118,7 +128,7 @@ public class OrderServiceImp implements OrderService{
             e.printStackTrace();
         }
 
-        JSONArray jsonResponse = Utils.arrayRequestWeDeliverAPI(request);
+        JSONArray jsonResponse = utils.arrayRequestWeDeliverAPI(request);
 
         List<OrderDto> list = new ArrayList<>();
 

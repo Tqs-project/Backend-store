@@ -49,14 +49,14 @@ public class Order {
         order_items = new ArrayList<>();
     }
 
-    public Order(String paymentType, User user, String location, List<OrderItem> order_items) {
+    public Order(String paymentType, User user, Double cost, String location, List<OrderItem> order_items) {
         this.paymentType = paymentType;
         this.user = user;
+        this.cost = cost;
         this.location = location;
         this.order_items = order_items;
 
         this.orderTimestamp = new Timestamp(System.currentTimeMillis());
         this.status = "WAITING";
-        order_items = new ArrayList<>();
     }
 }
