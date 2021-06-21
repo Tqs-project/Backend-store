@@ -39,7 +39,7 @@ public class OrderServiceImp implements OrderService{
     @Autowired
     private OrderRepository orderRepository;
 
-    private Utils utils = new Utils();
+    private final Utils utils = new Utils();
 
     public OrderDto placeOrder(OrderDto orderDto, String token) throws IOException, InterruptedException {
 

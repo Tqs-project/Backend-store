@@ -27,6 +27,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImpTest {
@@ -95,7 +96,4 @@ class OrderServiceImpTest {
         res.setOrderTimestamp(null);
         assertThat(res).isEqualTo(orderDto);
     }
-
-    @Test
-    void 
 }
