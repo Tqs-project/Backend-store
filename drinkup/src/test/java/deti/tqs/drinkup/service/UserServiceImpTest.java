@@ -117,6 +117,7 @@ class UserServiceImpTest {
         Mockito.when(encoder.encode(ArgumentMatchers.anyString())).thenReturn(
                 "encrypted-token"
         );
+        token.setId(userCreateDto.getId());
 
         Mockito.when(encoder.matches(userCreateDto.getPassword(),
                 userCreateDto.getPassword() + "-encoded"))
@@ -141,6 +142,7 @@ class UserServiceImpTest {
         Mockito.when(encoder.encode(ArgumentMatchers.anyString())).thenReturn(
                 "encrypted-token"
         );
+        token.setId(userCreateDto.getId());
 
         Mockito.when(encoder.matches(userCreateDto.getPassword(),
                 userCreateDto.getPassword() + "-encoded"))
