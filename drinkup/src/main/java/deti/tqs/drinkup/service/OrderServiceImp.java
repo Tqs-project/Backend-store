@@ -68,7 +68,6 @@ public class OrderServiceImp implements OrderService{
         }
 
         JSONObject jsonResponse = utils.requestWeDeliverAPI(request);
-
         if(jsonResponse!=null){
             List<OrderItem> orders = new ArrayList<>();
             for (Map.Entry<String, Integer> entry : orderDto.getItems().entrySet()) {

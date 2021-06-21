@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200 , https://drinkupstore.herokuapp.com" })
+@CrossOrigin(origins = {"http://localhost:4200" , "https://drinkupstore.herokuapp.com" })
 @RequestMapping("/api/order")
 public class OrderController {
 
@@ -67,7 +67,7 @@ public class OrderController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<OrderDto>> getAllOrder(@RequestBody boolean active) throws IOException, InterruptedException, JSONException {
+    public ResponseEntity<List<OrderDto>> getAllOrder(@RequestHeader boolean active) throws IOException, InterruptedException, JSONException {
 
         return new ResponseEntity<>(this.orderService.getAllOrders(active, token),
                 HttpStatus.ACCEPTED);
