@@ -117,7 +117,7 @@ class UserControllerTest_WithMockServiceIT {
 
     @Test
     void whenPostUserLogin_ThenReturnToken() throws Exception {
-        var token = new TokenDto("encrypted-token", "");
+        var token = new TokenDto(user.getId(), "encrypted-token", "");
 
         var login = new UserLoginDto(
                 user.getUsername(),
@@ -145,7 +145,7 @@ class UserControllerTest_WithMockServiceIT {
 
     @Test
     void whenPostUserLoginWithError_thenReturnEmptyToken() throws Exception {
-        var token = new TokenDto("", "Some error occurred");
+        var token = new TokenDto(null, "", "Some error occurred");
 
         var login = new UserLoginDto(
                 user.getUsername(),

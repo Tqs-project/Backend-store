@@ -67,7 +67,7 @@ class UserServiceImpTest {
         );
         userFromDb.setId(3L);
 
-        token = new TokenDto("encrypted-token", "");
+        token = new TokenDto(3L,"encrypted-token", "");
 
     }
 

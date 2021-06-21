@@ -60,11 +60,11 @@ public class UserServiceImp implements UserService{
         } else if (userDto.getEmail() != null) {
             optUser = this.userRepository.findByEmail(userDto.getEmail());
         } else {
-            return new TokenDto("", "Please provide username or email for authentication");
+            return new TokenDto(null, "", "Please provide username or email for authentication");
         }
         if (optUser==null) {
             log.debug("No user found");
-            return new TokenDto("", "Bad authentication parameters");
+            return new TokenDto(null, "", "Bad authentication parameters");
         }
 
         var user = optUser;
@@ -74,8 +74,8 @@ public class UserServiceImp implements UserService{
             user.setAuthToken(token);
             this.userRepository.saveAndFlush(user);
 
-            return new TokenDto(token, "");
+            return new TokenDto(user.getId(), token, "");
         }
-        return new TokenDto("", "Bad authentication parameters");
+        return new TokenDto(null, "", "Bad authentication parameters");
     }
 }

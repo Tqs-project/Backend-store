@@ -5,6 +5,7 @@ import deti.tqs.drinkup.dto.UserDto;
 import deti.tqs.drinkup.dto.UserLoginDto;
 import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.service.UserService;
+import deti.tqs.drinkup.utils.Utils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,5 +76,19 @@ public class UserController {
     }
 
 
+    @GetMapping()
+    public ResponseEntity<UserDto> getUser(@RequestHeader String username,
+                                        @RequestHeader String idToken) {
+        System.out.println("username = " + username);
+        System.out.println("token = " + idToken);
+        var user = userRepository.findByUsername(username);
+        System.out.println("user = " + user.getEmail());
+        if (user == null)
+            return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
 
+        if (!idToken.equals(user.getAuthToken()))
+            return new ResponseEntity<>(new UserDto(), HttpStatus.UNAUTHORIZED);
+
+        return new ResponseEntity<>(Utils.parseUserDto(user), HttpStatus.OK);
+    }
 }
