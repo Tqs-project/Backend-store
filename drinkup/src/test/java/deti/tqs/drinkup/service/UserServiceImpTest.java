@@ -146,6 +146,10 @@ class UserServiceImpTest {
                 userCreateDto.getPassword() + "-encoded"))
                 .thenReturn(true);
 
+
+        userCreateDto.setUsername(null);
+        System.out.println(userCreateDto.getEmail());
+
         Mockito.when(userRepository.findByEmail(userCreateDto.getEmail()))
                 .thenReturn(user);
 
@@ -153,10 +157,10 @@ class UserServiceImpTest {
                 .isEqualTo(token);
 
         Mockito.verify(userRepository, Mockito.times(1)).findByEmail(
-                userCreateDto.getUsername()
+                userCreateDto.getEmail()
         );
         Mockito.verify(userRepository, Mockito.times(0)).findByUsername(
-                userCreateDto.getEmail()
+                userCreateDto.getUsername()
         );
     }
 }
