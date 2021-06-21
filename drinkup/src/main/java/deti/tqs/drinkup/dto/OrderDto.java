@@ -1,7 +1,6 @@
 package deti.tqs.drinkup.dto;
 
 
-import deti.tqs.drinkup.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

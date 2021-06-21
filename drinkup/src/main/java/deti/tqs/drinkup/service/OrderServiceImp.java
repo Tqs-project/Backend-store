@@ -40,6 +40,7 @@ public class OrderServiceImp implements OrderService{
     private OrderRepository orderRepository;
 
     private final Utils utils = new Utils();
+    private static final String BASEURI = "http://webmarket-314811.oa.r.appspot.com/";
 
     public OrderDto placeOrder(OrderDto orderDto, String token) throws IOException, InterruptedException {
 
@@ -56,7 +57,7 @@ public class OrderServiceImp implements OrderService{
 
         try {
             request = HttpRequest.newBuilder()
-                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com/api/order"))
+                    .uri(new URI(BASEURI+"api/order"))
                     .setHeader("username", "DrinkUp")
                     .setHeader("idToken", token)
                     .setHeader("Content-Type", "application/json")
@@ -73,18 +74,21 @@ public class OrderServiceImp implements OrderService{
             for (Map.Entry<String, Integer> entry : orderDto.getItems().entrySet()) {
                 new OrderItem(itemRepository.findByName(entry.getKey()), entry.getValue());
             }
-            var order = new Order(orderDto.getPaymentType(), userRepository.findByUsername(orderDto.getUserName()).get(), orderDto.getCost(), orderDto.getLocation(), orders);
-            var ret = orderRepository.save(order);
-            return new OrderDto(
-                    ret.getId(),
-                    ret.getOrderTimestamp(),
-                    ret.getPaymentType(),
-                    ret.getStatus(),
-                    ret.getCost(),
-                    ret.getLocation(),
-                    ret.getUser().getUsername(),
-                    orderDto.getItems()
-            );
+            var user = userRepository.findByUsername(orderDto.getUserName());
+            if(user.isPresent()){
+                var order = new Order(orderDto.getPaymentType(), user.get(), orderDto.getCost(), orderDto.getLocation(), orders);
+                var ret = orderRepository.save(order);
+                return new OrderDto(
+                        ret.getId(),
+                        ret.getOrderTimestamp(),
+                        ret.getPaymentType(),
+                        ret.getStatus(),
+                        ret.getCost(),
+                        ret.getLocation(),
+                        ret.getUser().getUsername(),
+                        orderDto.getItems()
+                );
+            }
         }
         return null;
     }
@@ -95,7 +99,7 @@ public class OrderServiceImp implements OrderService{
 
         try {
             request = HttpRequest.newBuilder()
-                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com/api/customer/orders/"+id))
+                    .uri(new URI(BASEURI+"api/customer/orders/"+id))
                     .setHeader("username", "DrinkUp")
                     .setHeader("idToken", token)
                     .setHeader("Content-Type", "application/json")
@@ -118,7 +122,7 @@ public class OrderServiceImp implements OrderService{
 
         try {
             request = HttpRequest.newBuilder()
-                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com/api/customer/orders/"))
+                    .uri(new URI(BASEURI+"api/customer/orders/"))
                     .setHeader("username", "DrinkUp")
                     .setHeader("idToken", token)
                     .setHeader("Content-Type", "application/json")
@@ -133,7 +137,7 @@ public class OrderServiceImp implements OrderService{
         List<OrderDto> list = new ArrayList<>();
 
         if(jsonResponse!=null){
-            for (int i = 0; i < jsonResponse.length(); i++) {
+            for (var i = 0; i < jsonResponse.length(); i++) {
                  var o = jsonResponse.getJSONObject(i);
                  var orderDto = new OrderDto();
                  orderDto.setCost((Double) o.get("cost"));

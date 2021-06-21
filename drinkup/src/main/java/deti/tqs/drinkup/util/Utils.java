@@ -17,7 +17,11 @@ import java.util.HashMap;
 
 @Log4j2
 public class Utils {
-    public Utils() { }
+    private static final String URI = "http://webmarket-314811.oa.r.appspot.com/";
+
+    public Utils() {
+        //Utilities for requests
+    }
 
     public JSONObject requestWeDeliverAPI(HttpRequest request) throws IOException, InterruptedException {
 
@@ -69,7 +73,7 @@ public class Utils {
 
         try {
             request = HttpRequest.newBuilder()
-                    .uri(new URI("http://webmarket-314811.oa.r.appspot.com/api/customer/signin"))
+                    .uri(new URI(URI+"api/customer/signin"))
                     .setHeader("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();

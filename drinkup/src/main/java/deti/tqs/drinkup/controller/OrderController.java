@@ -1,8 +1,6 @@
 package deti.tqs.drinkup.controller;
 
 import deti.tqs.drinkup.dto.OrderDto;
-import deti.tqs.drinkup.model.Item;
-import deti.tqs.drinkup.model.User;
 import deti.tqs.drinkup.repository.ItemRepository;
 import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.service.OrderService;
@@ -38,6 +36,7 @@ public class OrderController {
     private final String token = utils.getAuthToken();
 
     public OrderController() throws JSONException, IOException, InterruptedException {
+        //to allow for non autowired fields
     }
 
     @PostMapping()
@@ -76,7 +75,7 @@ public class OrderController {
 
     private boolean checkItemIntegrity(OrderDto orderDto){
         HashMap<String, Integer> items = orderDto.getItems();
-        double trueCost = 0.0;
+        var trueCost = 0.0;
 
         for (Map.Entry<String,Integer> entry : items.entrySet()) {
             if(!itemRepository.existsByName(entry.getKey())){

@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Log4j2
 @WebMvcTest(OrderController.class)
-class OrderControllerTest {
+class OrderController_WithMockServiceIT {
 
     @Autowired
     private MockMvc mvc;

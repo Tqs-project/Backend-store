@@ -1,6 +1,5 @@
 package deti.tqs.drinkup.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import deti.tqs.drinkup.dto.OrderDto;
 import org.json.JSONException;
 
