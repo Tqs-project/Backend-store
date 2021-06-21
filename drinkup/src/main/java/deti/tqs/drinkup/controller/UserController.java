@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 @Log4j2
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200 , https://drinkupstore.herokuapp.com" })
 @RequestMapping("/api/users")
 public class UserController {
 
