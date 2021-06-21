@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Log4j2
 @RestController
 @RequestMapping("/api/users")
@@ -48,7 +50,7 @@ public class UserController {
                 userDto.getUsername(),
                 userDto.getEmail(),
                 userDto.getPassword(),
-                null
+                new ArrayList<>()
         );
         return new ResponseEntity<>(userService.updateUser(user1),
                 HttpStatus.OK);

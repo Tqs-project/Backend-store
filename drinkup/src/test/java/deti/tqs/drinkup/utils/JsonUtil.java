@@ -1,4 +1,4 @@
-package deti.tqs.drinkup.util;
+package deti.tqs.drinkup.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

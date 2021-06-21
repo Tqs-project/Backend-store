@@ -6,8 +6,7 @@ import deti.tqs.drinkup.dto.UserLoginDto;
 import deti.tqs.drinkup.model.User;
 import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.service.UserService;
-import deti.tqs.drinkup.util.JsonUtil;
-import lombok.extern.log4j.Log4j2;
+import deti.tqs.drinkup.utils.JsonUtil;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -54,7 +54,7 @@ class UserControllerTest_WithMockServiceIT {
         user.setAuthToken("token");
 
         userDto = new UserDto(
-                        3L,
+                        null,
                         "Albert",
                         "albert@gmail.com",
                         "password",
@@ -63,7 +63,7 @@ class UserControllerTest_WithMockServiceIT {
                 );
 
         userDtoResponse = new UserDto(
-                        3L,
+                    3L,
                         "Albert",
                         "albert@gmail.com",
                         "",
@@ -89,6 +89,30 @@ class UserControllerTest_WithMockServiceIT {
                 .andExpect(jsonPath("$.password", CoreMatchers.is("")));
 
         Mockito.verify(userService, Mockito.times(1)).registerUser(userDto);
+    }
+
+    @Test
+    void whenPutUser_thenReturnUserUpdated() throws Exception {
+
+        userDto.setEmail("albert22@gmail.com");
+        userDtoResponse.setEmail("albert22@gmail.com");
+        Mockito.when(userService.updateUser(userDto))
+                .thenReturn(userDtoResponse);
+
+        Mockito.when(userRepository.findByUsername(user.getUsername()))
+                .thenReturn(user);
+
+        mvc.perform(
+                put("/api/users")
+                        .header("username", userDto.getUsername())
+                        .header("idToken", "token")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JsonUtil.toJson(userDto))
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("$.username", CoreMatchers.is(userDto.getUsername())))
+                .andExpect(jsonPath("$.email", CoreMatchers.is(userDto.getEmail())));
+
+        Mockito.verify(userService, Mockito.times(1)).updateUser(userDto);
     }
 
     @Test
