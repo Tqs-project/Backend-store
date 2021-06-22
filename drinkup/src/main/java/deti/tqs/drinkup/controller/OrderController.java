@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200" , "https://www.drinkupstore.herokuapp.com" })
+@CrossOrigin(origins = {"http://localhost:4200" , "https://www.drinkupstore.herokuapp.com","http://drinkupstore.herokuapp.com" })
 @RequestMapping("/api/order")
 public class OrderController {
 
