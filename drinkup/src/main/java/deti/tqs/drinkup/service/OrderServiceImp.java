@@ -42,7 +42,7 @@ public class OrderServiceImp implements OrderService{
     private final Utils utils = new Utils();
     private static final String BASEURI = "http://webmarket-314811.oa.r.appspot.com/";
 
-    public OrderDto placeOrder(OrderDto orderDto, String token) throws IOException, InterruptedException {
+    public OrderDto placeOrder(OrderDto orderDto, String token) throws IOException, InterruptedException, JSONException {
 
         var body = new HashMap<String, Object>();
         body.put("username", "DrinkUp");
@@ -78,7 +78,7 @@ public class OrderServiceImp implements OrderService{
                 var order = new Order(orderDto.getPaymentType(), user.get(), orderDto.getCost(), orderDto.getLocation(), orders);
                 var ret = orderRepository.save(order);
                 return new OrderDto(
-                        ret.getId(),
+                        Long.valueOf((Integer) jsonResponse.get("id")),
                         ret.getOrderTimestamp(),
                         ret.getPaymentType(),
                         ret.getStatus(),

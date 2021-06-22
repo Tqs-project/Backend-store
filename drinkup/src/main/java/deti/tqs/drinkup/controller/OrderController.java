@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200" , "https://drinkupstore.herokuapp.com" })
+@CrossOrigin(origins = {"http://localhost:4200" , "https://www.drinkupstore.herokuapp.com" })
 @RequestMapping("/api/order")
 public class OrderController {
 
@@ -41,7 +41,7 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) throws IOException, InterruptedException {
+    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) throws IOException, InterruptedException, JSONException {
 
         var user = userRepository.findByUsername(orderDto.getUserName());
         if (user.isEmpty())

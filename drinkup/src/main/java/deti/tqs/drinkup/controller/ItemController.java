@@ -12,7 +12,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200" , "https://drinkupstore.herokuapp.com" })
+@CrossOrigin(origins = {"http://localhost:4200" , "https://www.drinkupstore.herokuapp.com" })
 @RequestMapping("/api/item")
 public class ItemController {
 
