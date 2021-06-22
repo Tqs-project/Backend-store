@@ -9,6 +9,7 @@ import deti.tqs.drinkup.repository.ItemRepository;
 import deti.tqs.drinkup.repository.OrderRepository;
 import deti.tqs.drinkup.repository.UserRepository;
 import deti.tqs.drinkup.util.Utils;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -87,7 +88,7 @@ class OrderServiceImpTest {
     }
 
     @Test
-    void createOrder_AddToDB_Test() throws IOException, InterruptedException {
+    void createOrder_AddToDB_Test() throws IOException, InterruptedException, JSONException {
         Mockito.when(userRepository.findByUsername("Manel123")).thenReturn(java.util.Optional.ofNullable(user));
         Mockito.when(orderRepository.save(Mockito.any(Order.class))).thenReturn(order);
         Mockito.when(utils.requestWeDeliverAPI(Mockito.any(HttpRequest.class))).thenReturn(new JSONObject());
